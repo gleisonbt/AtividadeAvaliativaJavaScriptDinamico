@@ -1,41 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cadastro de Animes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Animes</title>
 </head>
-<body>   
+<body>
+    <form>
+        <label for="nome">Nome: </label>
+        <input type="text" name="nome" id="nome"><br><br>
 
-    <h1>Cadastro de Animes</h1>
-
-    <form id="formAnime">
-        <label for="nome">Nome do Anime:</label>
-        <input type="text" id="nome" name="nome" required><br><br>
-
-        <label for="genero">Gênero:</label>
-        <select id="genero" name="genero">
-            <option value="terror">Terror</option>
-            <option value="comedia">Comédia</option>
+        <label for="genero">Genero: </label>
+        <select name="genero" id="genero">
+            <option value="shonen">Shonen</option>
             <option value="romance">Romance</option>
-            <option value="acao">Ação</option>   
-
-            <option value="isekai">Isekai</option>
+            <option value="terror">Terror</option>
             <option value="outros">Outros</option>
         </select><br><br>
 
-        <label for="ano">Ano de Lançamento:</label>
-        <input type="number" id="ano" name="ano" required><br><br>
+        <label for="ano">Ano: </label>
+        <input type="number" name="ano" id="ano"><br><br>
 
-        <label for="nota">Nota:</label>
-        <input type="number" id="nota" name="nota" min="0" max="10" required><br><br>
+        <label for="nota">Nota: </label>
+        <input type="number" name="nota" id="nota"><br><br>
 
-        <button onclick="guardarDados(event)">Cadastrar</button><br><br>
-    </form>
+        <button id="enviar">Submeter</button>
 
-    <table id="tabelaAnimes" border="2">
+    </form><br><br>
+
+    <table id="tabela" border="1">
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Gênero</th>
+                <th>Genero</th>
                 <th>Ano</th>
                 <th>Nota</th>
             </tr>
@@ -45,57 +42,25 @@
     </table>
 
     <script>
-        var animes = [];
-
-        function guardarDados(event) {
+        document.getElementById("enviar").addEventListener("click", function(){
             event.preventDefault();
 
-            var nome = document.getElementById("nome").value;
-            var genero = document.getElementById("genero").value;
-            var ano = document.getElementById("ano").value;
-            var nota = document.getElementById("nota").value;
+            var novaLinha = document.createElement("tr");
 
-            animes.push({ 'nome':nome, 'genero':genero, 'ano':ano, 'nota':nota });
+            var dados = [document.getElementById("nome").value,
+            document.getElementById("genero").value,
+            document.getElementById("ano").value,
+            document.getElementById("nota").value];
 
-            limparCampos();
-            exibirAnimes();
-        }
+            dados.forEach(function(dado){
+                var novoDado = document.createElement("td");
+                novoDado.innerHTML = dado;
+                novaLinha.appendChild(novoDado);
+            });
 
-        function limparCampos() {
-            document.getElementById("nome").value = "";
-            document.getElementById("genero").selectedIndex = 0;
-            document.getElementById("ano").value = "";
-            document.getElementById("nota").value = "";
-        }
+            document.getElementById("corpoTabela").appendChild(novaLinha);
 
-        function exibirAnimes() {
-            var tbody = document.getElementById("corpoTabela");
-            tbody.innerHTML = "";
-
-            for (var i = 0; i < animes.length; i++) {
-                var anime = animes[i];
-                var novaLinha = document.createElement("tr");
-
-                var celulaNome = document.createElement("td");
-                celulaNome.textContent = anime.nome;
-                novaLinha.appendChild(celulaNome);
-
-                var celulaGenero = document.createElement("td");
-                celulaGenero.textContent = anime.genero;
-                novaLinha.appendChild(celulaGenero);
-
-                var celulaAno = document.createElement("td");
-                celulaAno.textContent = anime.ano;
-                novaLinha.appendChild(celulaAno);
-
-                var celulaNota = document.createElement("td");
-                celulaNota.textContent = anime.nota;
-                novaLinha.appendChild(celulaNota);
-
-                tbody.appendChild(novaLinha);
-            }
-        }
-
+        });
     </script>
 </body>
 </html>
