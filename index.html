@@ -47,11 +47,14 @@
 
             var novaLinha = document.createElement("tr");
 
+            //Guardando valores dos cmapos do formulário em um dicionario
             var dado = {'nome': document.getElementById("nome").value,
             'genero': document.getElementById("genero").value,
             'ano': document.getElementById("ano").value,
             'nota': document.getElementById("nota").value};
 
+            //Para acessar cada chave do dicionario, use a instrução keys
+            //Para percorrer todos os elementos de um vetor, use a funcao forEache
             Object.keys(dado).forEach(function(chave){
                 var novoDado = document.createElement("td");
                 novoDado.innerHTML = dado[chave];
