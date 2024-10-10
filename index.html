@@ -47,14 +47,14 @@
 
             var novaLinha = document.createElement("tr");
 
-            var dados = [document.getElementById("nome").value,
-            document.getElementById("genero").value,
-            document.getElementById("ano").value,
-            document.getElementById("nota").value];
+            var dado = {'nome': document.getElementById("nome").value,
+            'genero': document.getElementById("genero").value,
+            'ano': document.getElementById("ano").value,
+            'nota': document.getElementById("nota").value};
 
-            dados.forEach(function(dado){
+            Object.keys(dado).forEach(function(chave){
                 var novoDado = document.createElement("td");
-                novoDado.innerHTML = dado;
+                novoDado.innerHTML = dado[chave];
                 novaLinha.appendChild(novoDado);
             });
 
